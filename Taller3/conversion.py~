@@ -1,0 +1,23 @@
+# Este programa convierte coordinadas elípsoidales a Earth Centered Earth Fixed cartesian coordinates. Este programa recive como parametros la latitud, longitud, altura y los parámetros a y f del ellipsoide usado.
+
+import sys
+import math
+import numpy as np
+
+latitud1 = sys.argv[1] # Parametro 1
+longitud1 = sys.argv[2] # Parametro 2
+altura = sys.argv[3] # Parametro 3
+
+latitud = (latitud*(math.pi))/180
+longitud = (longitud*(math.pi))/180
+
+a = sys.argv[4] # Parametro 4
+f = sys.argv[5] # Parametro 5
+
+e = (2*f)-(math.pow(f,2))
+
+N = a/(math.sqrt(1-((e)*(math.pow((math.sin(latitud)),2)))))
+
+x = (N + altura)*(math.cos(latitud))*(math.cos(longitud))
+y = (N + altura)*(math.cos(latitud))*(math.sin(longitud))
+z = ((N*(1-e)) + altura)*(math.sin(latitud))
